@@ -1,37 +1,39 @@
-# test_script.py - Sample code with intentional issues for OpenCode to review
+# test_script.py - Sample code with fixes applied
 
-def calculate_sum(list):
-    """Calculate sum of a list."""
-    total = 0
-    for i in range(len(list)):
-        total = total + list[i]
-    return total
+def calculate_sum(numbers):
+    """Calculate sum of a list of numbers using built-in sum()."""
+    return sum(numbers)
 
 def process_data(data):
-    result = []
-    for item in data:
-        if item != None:
-            result.append(item)
-    return result
+    """Filter out None values from data."""
+    return [item for item in data if item is not None]
 
 def fetch_user(user_id):
-    # TODO: implement actual API call
-    return {"id": user_id, "name": "Test User"}
+    """Fetch user data from API.
+    
+    Raises:
+        NotImplementedError: If API client is not configured.
+    """
+    raise NotImplementedError("API client not configured for fetch_user")
 
 class DataProcessor:
+    """Process and store data items."""
+    
     def __init__(self):
-        self.data = []
+        self._data = []
     
     def add(self, item):
-        self.data.append(item)
+        """Add an item to the processor."""
+        self._data.append(item)
     
-    def get(self):
-        return self.data
+    def get_all(self):
+        """Return all stored items."""
+        return self._data.copy()
 
 if __name__ == "__main__":
     numbers = [1, 2, 3, 4, 5]
-    print(calculate_sum(numbers))
+    print(f"Sum: {calculate_sum(numbers)}")
     
     dp = DataProcessor()
     dp.add("test")
-    print(dp.get())
+    print(f"Data: {dp.get_all()}")
