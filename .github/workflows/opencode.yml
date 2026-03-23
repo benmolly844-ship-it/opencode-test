@@ -30,9 +30,10 @@ jobs:
         uses: anomalyco/opencode/github@latest
         env:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           model: anthropic/claude-sonnet-4-20250514
           share: true
+          use_github_token: true
+          token: ${{ secrets.GITHUB_TOKEN }}
           prompt: |
             ${{ github.event_name == 'pull_request' && 'Review this pull request for code quality, bugs, and improvements.' || '' }}
